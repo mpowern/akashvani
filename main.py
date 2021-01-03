@@ -1,27 +1,14 @@
-import json
+from autoscraper.auto_scraper import AutoScraper
 
+url = 'https://stackoverflow.com/questions/2081586/web-scraping-with-python'
 
-import requests
-
-TICKER_API_URL = 'https://api.coinmarketcap.com/v1/ticker/'
-crypto = 'bitcoin'
-
-
-def get_latest_crypto_price(coin):
-    response = requests.get(TICKER_API_URL + coin)
-    response_json = response.json()
-
-    return float(response_json[0]['price_usd'])
 
 
 # Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    last_price = -1
+# We can add one or multiple candidates here.
+# You can also put urls here to retrieve urls.
+wanted_list = ["How to call an external command?"]
 
-    while True:
-
-        price = get_latest_crypto_price(crypto)
-
-        if price != last_price:
-            print('Bitcoin price: ', price)
-            last_price = price
+scraper = AutoScraper()
+result = scraper.build(url, wanted_list)
+print(result)
