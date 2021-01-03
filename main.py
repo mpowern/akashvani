@@ -1,14 +1,16 @@
-from autoscraper.auto_scraper import AutoScraper
+import requests
 
-url = 'https://stackoverflow.com/questions/2081586/web-scraping-with-python'
+url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
+parameters = {
+    'start': '1',
+    'limit': '5000',
+    'convert': 'USD'
+}
+headers = {
+    'Accepts': 'application/json',
+    'X-CMC_PRO_API_KEY': 'd3bd9692-75a3-4c6e-87d3-6a70266055c3',
+}
 
-
-
-# Press the green button in the gutter to run the script.
-# We can add one or multiple candidates here.
-# You can also put urls here to retrieve urls.
-wanted_list = ["How to call an external command?"]
-
-scraper = AutoScraper()
-result = scraper.build(url, wanted_list)
-print(result)
+response = requests.get(url, headers=headers).json()
+data = response
+print(data)
